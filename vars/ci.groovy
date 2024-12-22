@@ -19,7 +19,7 @@ pipeline {
                 echo 'compile'
             }
         }
-        stage('Release'){
+        stage('Release App'){
             steps{
                 echo 'compile'
             }
