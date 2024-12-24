@@ -5,9 +5,7 @@ def call () {
      stage('code checkout'){}
      stage('compile'){}
      stage('Build'){}
-
-  }
-  } else {
+     } else {
      stage('code checkout'){}
      stage('compile'){}
      stage('Test cases') {}
@@ -24,3 +22,4 @@ def call () {
 
   
 
+}
