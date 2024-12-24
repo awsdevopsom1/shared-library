@@ -5,8 +5,11 @@ def call () {
      } else 
         env.BranchName = env.BRANCH_NAME
      stage('check out'){
-        git branch: 'main', url: 'https://github.com/awsdevopsom1/import-backend.git'
+        // git branch: 'main', url: 'https://github.com/awsdevopsom1/import-backend.git'
+        checkout scmGit(branches: [[name: "${BranchName}"]],
+         userRemoteConfigs: [[url: 'https://github.com/awsdevopsom1/import-backend.git']])
      }
+     sh 'ls'
      stage('compile'){}
     if(BRANCH_NAME == "main"){
      stage('code checkout'){
