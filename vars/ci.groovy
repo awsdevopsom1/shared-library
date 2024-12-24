@@ -19,12 +19,17 @@ pipeline {
                 echo 'compile'
             }
         }
-        stage('Release App'){
+        stage('Release_App'){
             steps{
                 echo 'compile'
             }
         }
     }
+
 }  
 
 }
+
+
+
+/////
