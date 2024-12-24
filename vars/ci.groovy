@@ -8,6 +8,7 @@ def call () {
     } else if(BRANCH_NAME ==~ "PR.*"){
        stage('code checkout'){}
        stage('compile'){}
+       stage('Test cases') {}
        stage('integration Test cases') {} 
 
      } else {
