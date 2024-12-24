@@ -1,10 +1,18 @@
 def call () {
   node ('workstation1') {
     sh 'env'
-    if(BRANCH_NAME == "main")
-    stage('code checkout'){}
-    stage('compile'){}
+    if(BRANCH_NAME == "main"){
+     stage('code checkout'){}
+     stage('compile'){}
      stage('Build'){}
+
+  }
+  } else {
+     stage('code checkout'){}
+     stage('compile'){}
+     stage('Test cases') {}
+  }
+
 
 
 
@@ -14,5 +22,5 @@ def call () {
     // stage('Release_App'){}
     }
 
-}  
+  
 
