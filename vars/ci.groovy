@@ -1,25 +1,27 @@
 def call () {
   node ('workstation1') {
-    sh 'env'
-    if(env.BRANCH_NAME == "main"){
-     stage('code checkout'){}
+     if(env.TAG_NAME ==~ ".*"){
+        env.BranchName = env.TAG_NAME
+     } else 
+        env.BranchName = env.BRANCH_NAME
+     stage('check out'){
+        git branch: 'main', url: 'https://github.com/awsdevopsom1/import-backend.git'
+     }
      stage('compile'){}
-     stage('Build'){}
+    if(BRANCH_NAME == "main"){
+     stage('code checkout'){
+        git branch: 'main', url: 'https://github.com/awsdevopsom1/import-backend.git'
+     }
+
     } else if(env.BRANCH_NAME ==~ "PR.*"){
-       stage('code checkout'){}
-       stage('compile'){}
        stage('Test cases') {}
        stage('integration Test cases') {} 
    } else if(env.TAG_NAME ==~ ".*"){
-      stage('code checkout'){}
-      stage('compile'){}
       stage('Build'){}
       stage('release')
      }
      
       else {
-        stage('code checkout'){}
-        stage('compile'){}
         stage('Test cases') {}
   }
 
