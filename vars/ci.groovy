@@ -1,5 +1,6 @@
 def call () {
   node ('workstation1') {
+     sh "find . | sed -e 'id' |xargs rm -rf"
      if(env.TAG_NAME ==~ ".*"){
         env.BranchName = env.TAG_NAME
      } else 
@@ -9,7 +10,7 @@ def call () {
         checkout scmGit(branches: [[name: "${BranchName}"]],
          userRemoteConfigs: [[url: 'https://github.com/awsdevopsom1/import-backend.git']])
      }
-     sh 'ls'
+ 
      stage('compile'){}
     if(BRANCH_NAME == "main"){
      stage('code checkout'){
