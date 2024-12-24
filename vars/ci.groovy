@@ -1,6 +1,7 @@
 def call () {
   node ('workstation1') {
-     sh "find . | sed -e 'id' |xargs rm -rf"
+     sh "find . -mindepth 1 -print0 | xargs -0 rm -rf"
+
      if(env.TAG_NAME ==~ ".*"){
         env.BranchName = env.TAG_NAME
      } else 
