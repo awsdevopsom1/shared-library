@@ -1,4 +1,10 @@
-def call (){
+def AWS_SSM_PARAM(param_name) {
+  def OUTPUT = sh ( script: "aws ssm get-parameter --name ${param_name} --with-decryption --query 'Parameter.Value' --output text", returnStdout: true).trim()
+  return(OUTPUT)
+}
+
+ AWS_SSM_PARAM(para)
+ def call (){
    node ('workstation1') {
        sh "find . | sed -e '1d' | xargs rm -rf"
        if(env.TAG_NAME ==~ ".*"){
@@ -29,7 +35,14 @@ def call (){
       } else if(env.Branch_name ==~ "PR.*"){
          sh 'echo PR'
          stage('testcases') {}
-         stage('integrationtestcases'){}
+         stage('code quality'){
+           print(AWS_SSM_PARAM( param_name: 'sonar.token'))              
+
+            // sh 'sonar-scanner -Dsonar.host.url=http://172.31.80.177:9000 
+            // -Dsonar.login=${SONAR_TOKEN}
+            // -Dsonar.projectkey=import-backend   
+            // -Dsonar.exclusions=node_module/**  '
+         }
        
       } else if (env.TAG_name ==~ ".*"){
          sh 'echo TAG'
