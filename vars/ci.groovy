@@ -1,6 +1,5 @@
 def call (){
    node ('workstation1') {
-       sh 'env'
        sh "find . | sed -e '1d' | xargs rm -rf"
        if(env.TAG_NAME ==~ ".*"){
          env.branchName = "${env.TAG_NAME}" }
@@ -10,7 +9,7 @@ def call (){
        else {
           env.branchName = "${env.BRANCH_NAME}"
        } 
-       sh 'env' 
+       
          stage('codecheckout'){
             checkout scmGit(branches: [[name: "${env.branchName}"]],
             extensions: [],
@@ -18,7 +17,7 @@ def call (){
          }
         
          sh 'cat Jenkinsfile'
-         if(env.app_type == "nodejs"){
+         if(app_type == "nodejs"){
          stage('Download Dependcies'){
             sh 'npm install'
          }
