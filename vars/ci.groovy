@@ -1,10 +1,11 @@
 def call (){
    node ('workstation1') {
        sh 'env'
-       if(env.TAG_name ==~ ".*")
-         env.branchName = env.TAG_name
+       sh "find . | sed -e '1d' | xargs rm -rf"
+       if(env.TAG_NAME ==~ ".*")
+         env.branchName = env.TAG_NAME
        else {
-          env.branchName = env.Branch_name
+          env.branchName = env.BRANCH_NAME
        }  
          stage('codecheckout'){
             checkout scmGit(branches: [[name: "${env.branchName}"]],
