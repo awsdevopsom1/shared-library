@@ -14,7 +14,7 @@ def call (){
          stage('codecheckout'){
             checkout scmGit(branches: [[name: "${env.branchName}"]],
             extensions: [],
-            userRemoteConfigs: [[url: 'https://github.com/awsdevopsom1/import-backend.git']])
+            userRemoteConfigs: [[url: 'https://github.com/awsdevopsom1/${repo_name}.git']])
          }
          sh 'ls'
          sh 'cat Jenkinsfile'
