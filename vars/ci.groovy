@@ -38,7 +38,7 @@ def AWS_SSM_PARAM(param_name) {
         stage('Code Quality') {
         env.SONAR_TOKEN = AWS_SSM_PARAM('sonar.token')
         wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: "${SONAR_TOKEN}", var: 'PASSWORD']]]) {
-          sh 'sonar-scanner -Dsonar.host.url=http://172.31.80.177:9000 -Dsonar.login=${SONAR_TOKEN} -Dsonar.projectKey=${repo_name} -Dsonar.qualitygate.wait=true -Dsonar.exclusions=node_modules/**'
+          sh 'sonar-scanner -Dsonar.host.url=http://172.31.80.177:9000 -Dsonar.login=${SONAR_TOKEN} -Dsonar.projectKey=import-backend -Dsonar.qualitygate.wait=true -Dsonar.exclusions=node_modules/**'
         }
       }
        
