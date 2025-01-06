@@ -18,9 +18,10 @@ def call (){
          }
         
          sh 'cat Jenkinsfile'
-         if(env.app_type == "nodejs")
+         if(env.app_type == "nodejs"){
          stage('Download Dependcies'){
             sh 'npm install'
+         }
          }
 
        if(env.Branch_name == "main") {
