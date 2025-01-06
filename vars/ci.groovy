@@ -13,7 +13,7 @@ def call (){
             userRemoteConfigs: [[url: 'https://github.com/awsdevopsom1/import-backend.git']])
          }
          sh 'ls'
-         sh 'cat jenkinsfile'
+         sh 'cat Jenkinsfile'
          stage('codecompile'){}
 
        if(env.Branch_name == "main") {
