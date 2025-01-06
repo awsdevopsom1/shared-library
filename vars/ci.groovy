@@ -16,9 +16,12 @@ def call (){
             extensions: [],
             userRemoteConfigs: [[url: 'https://github.com/awsdevopsom1/import-backend.git']])
          }
-         sh 'ls'
+        
          sh 'cat Jenkinsfile'
-         stage('codecompile'){}
+         if(env.app_type == "nodejs")
+         stage('Download Dependcies'){
+            sh 'npm install'
+         }
 
        if(env.Branch_name == "main") {
          sh 'echo main'
