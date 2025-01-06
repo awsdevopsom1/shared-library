@@ -6,7 +6,8 @@ def call (){
          env.branchName = env.TAG_NAME
        else {
           env.branchName = env.BRANCH_NAME
-       }  
+       } 
+       sh 'env' 
          stage('codecheckout'){
             checkout scmGit(branches: [[name: "${env.branchName}"]],
             extensions: [],
