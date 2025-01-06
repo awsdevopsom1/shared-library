@@ -21,18 +21,21 @@ def call (){
          stage('codecompile'){}
 
        if(env.Branch_name == "main") {
-
+         sh 'echo main'
          stage('codeBuild'){}
       } else if(env.Branch_name ==~ "PR.*"){
+         sh 'echo PR'
          stage('testcases') {}
          stage('integrationtestcases'){}
-
+       
       } else if (env.TAG_name ==~ ".*"){
+         sh 'echo TAG'
          stage('build'){}
          stage('release'){}
       }
 
       else {
+         sh 'echo branch'
          stage('testcases'){}
       }
    }
