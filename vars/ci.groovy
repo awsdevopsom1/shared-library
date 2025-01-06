@@ -2,10 +2,13 @@ def call (){
    node ('workstation1') {
        sh 'env'
        sh "find . | sed -e '1d' | xargs rm -rf"
-       if(env.TAG_NAME ==~ ".*")
-         env.branchName = env.TAG_NAME
+       if(env.TAG_NAME ==~ ".*"){
+         env.branchName = "${env.TAG_NAME}" }
+       else if(env.BRANCH_NAME ==~ "PR-.*"){
+         env.branchName = "${env.CHANGE_BRANCH}"
+       }   
        else {
-          env.branchName = env.BRANCH_NAME
+          env.branchName = "${env.BRANCH_NAME}"
        } 
        sh 'env' 
          stage('codecheckout'){
